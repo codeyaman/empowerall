@@ -1,0 +1,26 @@
+# Secrets (real API keys — never commit)
+config.local.js
+
+# Test & scratch files
+test.js
+webhook_test.txt
+
+# Python cache
+__pycache__/
+
+# Design system drafts
+design-system/
+
+# Agent config
+.agent/
+
+# Firebase
+.firebase/
+.firebaserc
+
+# Node
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db

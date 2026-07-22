@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EmpowerAll — A free platform empowering underserved communities through legal education, skill development, voice amplification, and acts of kindness. Every voice matters. Every life counts.">
+  <meta name="keywords" content="social impact, education, human rights, community empowerment, skill courses, kindness">
+  <meta name="theme-color" content="#7C3AED">
+  <title>EmpowerAll — Every Voice Matters. Every Life Counts.</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%237C3AED'/><path d='M16 8c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z' fill='white' opacity='0.6'/><circle cx='16' cy='16' r='3' fill='%2322C55E'/></svg>">
+</head>
+<body>
+
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-brand" id="nav-brand" tabindex="0" role="button" aria-label="Go to home page">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="14" fill="currentColor" opacity="0.15"/>
+        <path d="M16 6C10.477 6 6 10.477 6 16s4.477 10 10 10 10-4.477 10-10S21.523 6 16 6zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z" fill="currentColor"/>
+        <circle cx="16" cy="16" r="3.5" fill="#22C55E"/>
+        <path d="M16 10a6 6 0 100 12 6 6 0 000-12zm0 10a4 4 0 110-8 4 4 0 010 8z" fill="currentColor" opacity="0.4"/>
+      </svg>
+      EmpowerAll<span class="brand-dot"></span>
+    </div>
+
+    <div class="nav-links" id="nav-links" role="menubar">
+      <a class="nav-link" data-page="home" role="menuitem" tabindex="0" id="link-home">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Home</span>
+      </a>
+      <a class="nav-link" data-page="rights" role="menuitem" tabindex="0" id="link-rights">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+        <span>Know Your Rights</span>
+      </a>
+      <a class="nav-link" data-page="voice" role="menuitem" tabindex="0" id="link-voice">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+        <span>Raise Your Voice</span>
+      </a>
+      <a class="nav-link" data-page="courses" role="menuitem" tabindex="0" id="link-courses">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"/></svg>
+        <span>Skill Courses</span>
+      </a>
+      <a class="nav-link" data-page="kindness" role="menuitem" tabindex="0" id="link-kindness">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        <span>Acts of Kindness</span>
+      </a>
+      <div class="nav-auth">
+        <a class="nav-link" id="nav-login-btn" role="button" tabindex="0" onclick="openAuthModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: relative; top: 4px;"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+          <span>Sign In</span>
+        </a>
+        <a class="nav-link" data-page="profile" role="menuitem" tabindex="0" id="link-profile" style="display: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </a>
+      </div>
+    </div>
+
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main id="main-content">
+
+    <!-- ======================== HOME PAGE ======================== -->
+    <section class="page active" id="page-home" aria-label="Home">
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-bg"></div>
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; gap: 3rem; width: 100%;">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              Free Forever — For Every Human
+            </div>
+            <h1>Every Voice Matters.<br>Every <span class="highlight">Life Counts</span>.</h1>
+            <p class="hero-text">Empowering underserved communities through education, legal awareness, skill building, and the simple power of kindness. Together, we create lasting change.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-lg" id="hero-cta-start" onclick="navigateTo('rights')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+                Start Your Journey
+              </button>
+              <button class="btn btn-outline btn-lg" onclick="navigateTo('voice')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/></svg>
+                Raise Your Voice
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-visual-grid">
+              <div class="hero-card-mini reveal reveal-delay-1" onclick="navigateTo('rights')">
+                <div class="card-icon purple">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                </div>
+                <h4>Know Your Rights</h4>
+                <p>Legal education modules</p>
+              </div>
+              <div class="hero-card-mini reveal reveal-delay-2" onclick="navigateTo('voice')">
+                <div class="card-icon warm">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/></svg>
+                </div>
+                <h4>Raise Your Voice</h4>
+                <p>Share your experience</p>
+              </div>
+              <div class="hero-card-mini reveal reveal-delay-3" onclick="navigateTo('courses')">
+                <div class="card-icon green">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"/></svg>
+                </div>
+                <h4>Skill Courses</h4>
+                <p>Grow your abilities</p>
+              </div>
+              <div class="hero-card-mini reveal reveal-delay-4" onclick="navigateTo('kindness')">
+                <div class="card-icon blue">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </div>
+                <h4>Acts of Kindness</h4>
+                <p>Spread the goodness</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="container">
+        <div class="stats-bar reveal">
+          <div class="stat-item">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #EDE9FE, #DDD6FE); color: var(--primary);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="stat-number" data-target="12847">0</span>
+            <span class="stat-label">Lives Touched</span>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #FFEDD5, #FED7AA); color: var(--secondary);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+            </div>
+            <span class="stat-number" data-target="3421">0</span>
+            <span class="stat-label">Voices Raised</span>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #DCFCE7, #BBF7D0); color: var(--cta);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"/></svg>
+            </div>
+            <span class="stat-number" data-target="8563">0</span>
+            <span class="stat-label">Courses Completed</span>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #FFE4E6, #FECDD3); color: #E11D48;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+            <span class="stat-number" data-target="5290">0</span>
+            <span class="stat-label">Acts of Kindness</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="container">
+        <div class="features-section">
+          <div class="section-header reveal">
+            <span class="section-tag">What We Offer</span>
+            <h2>Your Path to Empowerment</h2>
+            <p>Four pillars that work together to uplift communities, educate minds, amplify voices, and spread kindness across the world.</p>
+          </div>
+
+          <div class="feature-card-grid">
+            <div class="feature-card reveal reveal-delay-1" onclick="navigateTo('rights')">
+              <div class="card-icon-wrap purple">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+              </div>
+              <div class="feature-card-content">
+                <h3>Know Your Rights</h3>
+                <p>Learn about your fundamental human rights, legal protections, anti-discrimination laws, and child safety — become the shield for yourself and your community.</p>
+              </div>
+            </div>
+
+            <div class="feature-card reveal reveal-delay-2" onclick="navigateTo('voice')">
+              <div class="card-icon-wrap warm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              </div>
+              <div class="feature-card-content">
+                <h3>Raise Your Voice</h3>
+                <p>Share your experiences, report injustice, and connect with others who understand. Your story matters — and it can change the world for the better.</p>
+              </div>
+            </div>
+
+            <div class="feature-card reveal reveal-delay-3" onclick="navigateTo('courses')">
+              <div class="card-icon-wrap green">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"/></svg>
+              </div>
+              <div class="feature-card-content">
+                <h3>Skill Courses</h3>
+                <p>Free video-based courses in digital literacy, financial awareness, communication, and more — because skills open doors that were once closed.</p>
+              </div>
+            </div>
+
+            <div class="feature-card reveal reveal-delay-4" onclick="navigateTo('kindness')">
+              <div class="card-icon-wrap rose">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </div>
+              <div class="feature-card-content">
+                <h3>Acts of Kindness</h3>
+                <p>Document and share the good in the world — helping people, caring for animals, planting trees. Every small act makes the universe a little brighter.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quotes -->
+      <div class="container">
+        <div class="quotes-section">
+          <div class="container">
+            <div class="section-header reveal">
+              <span class="section-tag">Community Voices</span>
+              <h2>Stories That Inspire</h2>
+            </div>
+            <div class="quotes-grid">
+              <div class="quote-card reveal reveal-delay-1">
+                <p>"This platform taught me rights I never knew I had. Now I stand up for myself and my family with confidence."</p>
+                <span class="quote-author">— Priya, Student</span>
+              </div>
+              <div class="quote-card reveal reveal-delay-2">
+                <p>"I shared my story and realized I am not alone. The community here gave me courage to seek help and hope."</p>
+                <span class="quote-author">— Rahul, Community Member</span>
+              </div>
+              <div class="quote-card reveal reveal-delay-3">
+                <p>"The skill courses changed my life. I learned digital literacy and now I help others in my village connect with the world."</p>
+                <span class="quote-author">— Aisha, Volunteer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================== KNOW YOUR RIGHTS PAGE ======================== -->
+    <section class="page" id="page-rights" aria-label="Know Your Rights">
+      <div class="container">
+        <div class="rights-header reveal">
+          <span class="section-tag" style="margin-bottom: var(--space-sm);">🇮🇳 Indian Judiciary</span>
+          <h1>Know Your Rights</h1>
+          <p style="color: var(--text-muted); font-size: var(--fs-md); max-width: 600px; margin: 0 auto;">Understand the laws of India that protect you. From Fundamental Rights to Consumer Protection — knowledge is your strongest defence.</p>
+        </div>
+
+        <div class="card-grid" id="rights-cards">
+          <!-- Cards rendered by JS -->
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- ======================== RAISE YOUR VOICE PAGE ======================== -->
+    <section class="page" id="page-voice" aria-label="Raise Your Voice">
+      <div class="container">
+        <div class="voice-hero reveal">
+          <h1>Raise Your Voice</h1>
+          <p>Your story has the power to change lives. Share your experience, your emotions, your truth — and let the world listen.</p>
+        </div>
+
+        <div class="voice-form-container reveal">
+          <form id="voice-form" onsubmit="return false;">
+            <div class="form-group">
+              <label class="form-label" for="voice-category">Category <span>(What is this about?)</span></label>
+              <select class="form-select" id="voice-category" required>
+                <option value="" disabled selected>Select a category...</option>
+                <option value="Human Rights">Human Rights</option>
+                <option value="Discrimination">Discrimination</option>
+                <option value="Child Safety">Child Safety</option>
+                <option value="Community Issues">Community Issues</option>
+                <option value="Gender Inequality">Gender Inequality</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">How are you feeling? <span>(Select all that apply)</span></label>
+              <div class="emotion-tags" id="emotion-tags">
+                <button type="button" class="emotion-tag" data-emotion="Hurt">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" x2="16" y1="15" y2="15"/></svg>
+                  Hurt
+                </button>
+                <button type="button" class="emotion-tag" data-emotion="Angry">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/></svg>
+                  Angry
+                </button>
+                <button type="button" class="emotion-tag" data-emotion="Scared">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="16" r="2"/></svg>
+                  Scared
+                </button>
+                <button type="button" class="emotion-tag" data-emotion="Hopeful">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+                  Hopeful
+                </button>
+                <button type="button" class="emotion-tag" data-emotion="Seeking Help">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+                  Seeking Help
+                </button>
+                <button type="button" class="emotion-tag" data-emotion="Determined">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  Determined
+                </button>
+                <button type="button" class="emotion-tag" data-emotion="Grateful">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                  Grateful
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="voice-story">Your Story <span>(Share as much as you're comfortable with)</span></label>
+              <textarea class="form-textarea" id="voice-story" placeholder="Tell us what happened, how it affected you, and what you wish could change..." required></textarea>
+              <button type="button" class="btn btn-outline" id="voice-ai-btn" onclick="generateAIForInput('voice-story', 'voice_assistant')" style="margin-top: 8px; width: 100%; border-color: var(--primary); color: var(--primary);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                Generate with AI
+              </button>
+            </div>
+
+            <div class="form-group">
+              <div class="toggle-group">
+                <button type="button" class="toggle" id="anon-toggle" aria-label="Toggle anonymous submission"></button>
+                <span class="toggle-label">Submit anonymously</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" id="voice-submit" style="width: 100%;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/></svg>
+              Share Your Voice
+            </button>
+          </form>
+        </div>
+
+        <!-- Community Voices -->
+        <div class="voices-container" id="voices-container" style="margin-top: var(--space-3xl);">
+          <div class="section-header" style="text-align: center; margin-bottom: var(--space-xl);">
+            <div style="display: inline-block;">
+              <span class="section-tag">Community Voices</span>
+              <h2 style="margin:0;">Stories from Our Community</h2>
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: var(--space-md);">
+              <div class="tabs-container" style="display: inline-flex; gap: var(--space-sm); background: var(--surface-hover); padding: 6px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <button class="btn btn-ghost active" id="tab-voice-community" onclick="setVoiceFilter('community')" style="padding: 6px 16px; height: auto; border-radius: var(--radius-md); font-weight: 600;">Community</button>
+                <button class="btn btn-ghost" id="tab-voice-yours" onclick="setVoiceFilter('yours')" style="padding: 6px 16px; height: auto; border-radius: var(--radius-md); font-weight: 600;">Yours</button>
+              </div>
+            </div>
+          </div>
+          <div id="voices-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg);">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== SKILL COURSES PAGE ======================== -->
+    <section class="page" id="page-courses" aria-label="Skill Courses">
+      <div class="container">
+        <!-- Floating + Button -->
+        <button id="add-course-fab" class="btn btn-cta" onclick="openCourseModal()" style="position: fixed; bottom: 100px; right: 24px; width: 60px; height: 60px; border-radius: 50%; box-shadow: var(--shadow-lg); display: none; justify-content: center; align-items: center; z-index: 900; padding: 0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+
+        <div class="courses-header reveal">
+          <h1>Skill Courses</h1>
+          <p style="color: var(--text-muted); font-size: var(--fs-md); max-width: 550px; margin: 0 auto;">Free courses designed to open new doors. Learn at your own pace, test your knowledge, and grow every single day.</p>
+        </div>
+
+        <!-- Course Adder Modal Overlay -->
+        <div id="course-adder-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; padding: var(--space-md);">
+          <div style="background: var(--bg); max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); position: relative;">
+            <button onclick="closeCourseModal()" style="position: absolute; top: var(--space-md); right: var(--space-md); background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; z-index: 10;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+            <div class="yt-finder-section" id="yt-finder-section" style="box-shadow: none; border: none; margin: 0;">
+              <div class="yt-finder-header">
+                <div class="yt-finder-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"/></svg>
+                </div>
+                <div>
+                  <h2>What you want to learn today?</h2>
+                  <p>Tell us what you want to learn and we'll find the best courses from YouTube for you.</p>
+                </div>
+              </div>
+              <!-- Search Form -->
+              <div class="yt-finder-form" id="yt-finder-form">
+                <div class="form-group">
+                  <label class="form-label" for="yt-course-name">Course Name</label>
+                  <input type="text" class="form-input" id="yt-course-name" placeholder="e.g., Python Programming, Web Development, Machine Learning..." required>
+                </div>
+                <div class="yt-finder-row">
+                  <div class="form-group" style="flex: 1;">
+                    <label class="form-label" for="yt-course-level">Till which Level you want to learn</label>
+                    <select class="form-select" id="yt-course-level">
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Advanced">Advanced</option>
+                    </select>
+                  </div>
+                  <div class="form-group" style="flex: 1;">
+                    <label class="form-label" for="yt-course-lang">Language</label>
+                    <input type="text" class="form-input" id="yt-course-lang" placeholder="e.g., Hindi, English, Tamil..." value="English">
+                  </div>
+                </div>
+                <button class="btn btn-primary btn-lg" id="yt-search-btn" style="width: 100%;" onclick="searchYouTubeCourses()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  Get the Course
+                </button>
+              </div>
+              <!-- Loading State -->
+              <div class="yt-finder-loading" id="yt-finder-loading" style="display: none;">
+                <div class="ai-spinner"></div>
+                <p class="yt-loading-quote" id="yt-loading-quote">"The beautiful thing about learning is that nobody can take it away from you." — B.B. King</p>
+              </div>
+              <!-- Results -->
+              <div class="yt-finder-results" id="yt-finder-results" style="display: none;">
+                <!-- Rendered by JS -->
+              </div>
+              <!-- Preview Screen (NEW) -->
+              <div id="yt-preview-screen" style="display: none; padding: var(--space-md) 0;">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="courses-cards" style="width: 100%;">
+          <!-- Cards rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== ACTS OF KINDNESS PAGE ======================== -->
+    <section class="page" id="page-kindness" aria-label="Acts of Kindness">
+      <div class="container">
+        <div class="kindness-hero reveal">
+          <h1>Acts of Kindness</h1>
+          <p style="color: var(--text-muted); font-size: var(--fs-md); max-width: 550px; margin: 0 auto;">Every small act of kindness creates a ripple that reaches across the universe. Share the good you do — and inspire others to do the same.</p>
+        </div>
+
+        <!-- Upload Area -->
+        <div class="upload-area reveal" id="upload-area" tabindex="0" role="button" aria-label="Click or drag to upload a photo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+          <h3>Share Your Act of Kindness</h3>
+          <p>Click to upload a photo or drag and drop here</p>
+          <input type="file" id="kindness-file" accept="image/*" style="display: none;" aria-label="Upload image file">
+        </div>
+
+        <!-- Upload Form (shown after image selected) -->
+        <div class="upload-form" id="upload-form">
+          <img class="upload-preview" id="upload-preview" alt="Preview of uploaded kindness photo">
+          <div class="form-group">
+            <label class="form-label" for="kindness-caption">What did you do?</label>
+            <input type="text" class="form-input" id="kindness-caption" placeholder="e.g., Planted 5 trees in the neighborhood park">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <div class="kindness-tags" id="kindness-tags">
+              <button type="button" class="kindness-tag" data-tag="Helping People">Helping People</button>
+              <button type="button" class="kindness-tag" data-tag="Animal Care">Animal Care</button>
+              <button type="button" class="kindness-tag" data-tag="Planting Trees">Planting Trees</button>
+              <button type="button" class="kindness-tag" data-tag="Feeding Birds">Feeding Birds</button>
+              <button type="button" class="kindness-tag" data-tag="Spreading Joy">Spreading Joy</button>
+              <button type="button" class="kindness-tag" data-tag="Other">Other</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="kindness-story">Your Story or Emotion <span>(Optional)</span></label>
+            <textarea class="form-textarea" id="kindness-story" placeholder="Share your experience, idea, or how it made you feel..." rows="3"></textarea>
+            <button type="button" class="btn btn-outline" id="kindness-ai-btn" onclick="generateAIForInput('kindness-story', 'voice_assistant')" style="margin-top: 8px; width: 100%; border-color: var(--primary); color: var(--primary);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Generate with AI
+            </button>
+          </div>
+          <div style="display: flex; gap: var(--space-md);">
+            <button class="btn btn-cta btn-lg" id="kindness-submit" style="flex: 1;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              Share Kindness
+            </button>
+            <button class="btn btn-ghost" id="kindness-cancel">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="section-header reveal" style="text-align: center; margin-top: var(--space-3xl); margin-bottom: var(--space-xl);">
+          <div style="display: inline-block;">
+            <span class="section-tag">Kindness Gallery</span>
+            <h2 style="margin:0;">Beautiful Acts From Beautiful Souls</h2>
+          </div>
+          <div style="display: flex; justify-content: center; margin-top: var(--space-md);">
+            <div class="tabs-container" style="display: inline-flex; gap: var(--space-sm); background: var(--surface-hover); padding: 6px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+              <button class="btn btn-ghost active" id="tab-kindness-community" onclick="setKindnessFilter('community')" style="padding: 6px 16px; height: auto; border-radius: var(--radius-md); font-weight: 600;">Community</button>
+              <button class="btn btn-ghost" id="tab-kindness-yours" onclick="setKindnessFilter('yours')" style="padding: 6px 16px; height: auto; border-radius: var(--radius-md); font-weight: 600;">Yours</button>
+            </div>
+          </div>
+        </div>
+        <div class="kindness-gallery" id="kindness-gallery" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg);">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="empty-state" id="kindness-empty">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <h3>No acts shared yet</h3>
+          <p>Be the first to share an act of kindness and inspire others!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== PROFILE PAGE ======================== -->
+    <section class="page" id="page-profile" aria-label="User Profile">
+      <div class="container">
+        <div class="profile-header reveal">
+          <h1>Your Profile</h1>
+          <p style="color: var(--text-muted); font-size: var(--fs-md); max-width: 550px; margin: 0 auto;">Manage your details and track your impact on the community.</p>
+        </div>
+
+        <div class="profile-container reveal">
+          <div class="profile-card">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar" id="profile-avatar-display">JD</div>
+              <button class="avatar-edit-btn" aria-label="Edit avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+              </button>
+            </div>
+            <h2 id="profile-name-display">John Doe</h2>
+            <p id="profile-profession-display" style="color: var(--primary); font-weight: 500;">Student</p>
+            
+            <form id="profile-edit-form" class="profile-form">
+              <div class="form-group">
+                <label class="form-label" for="profile-email">Email Address</label>
+                <input type="email" class="form-input" id="profile-email" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profile-location">Location</label>
+                <input type="text" class="form-input" id="profile-location" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Date of Birth</label>
+                <input type="text" class="form-input" id="profile-dob-display" disabled style="background: var(--surface-hover); color: var(--text-muted);">
+              </div>
+            </form>
+
+            <div class="profile-actions">
+              <button class="btn btn-outline" id="signout-btn" style="color: #E11D48; border-color: rgba(225, 29, 72, 0.2);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                Sign Out
+              </button>
+            </div>
+          </div>
+
+          <div class="profile-right-column" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
+            <div class="profile-stats">
+              <h3>Your Impact</h3>
+              <div class="stat-grid">
+                <div class="stat-box">
+                  <span class="stat-box-val" id="profile-stat-courses">0</span>
+                  <span class="stat-box-label">Courses<br>Completed</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-box-val" id="profile-stat-rights">0</span>
+                  <span class="stat-box-label">Rights<br>Mastered</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-box-val" id="profile-stat-voices">0</span>
+                  <span class="stat-box-label">Stories<br>Shared</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Activity Dashboard -->
+            <div class="profile-activity">
+            <h3>Learning Activity Dashboard</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: var(--space-xl);">Track your daily attendance and weekly engagement on the portal.</p>
+            
+            <div class="activity-dashboard-grid" style="display: grid; grid-template-columns: 1fr; gap: var(--space-xl);">
+              <!-- Month-wise Calendar -->
+              <div class="activity-card" style="background: var(--bg-card); padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-xl); box-shadow: var(--shadow-md);">
+                <h4 style="margin-top: 0; color: var(--primary); display: flex; justify-content: space-between; align-items: center;">
+                  <span>Monthly Attendance</span>
+                  <span id="calendar-month-label" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;"></span>
+                </h4>
+                <div class="calendar-grid" id="profile-calendar-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: var(--space-md);">
+                  <!-- Days rendered by JS -->
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted); align-items: center; justify-content: flex-end;">
+                  <span>Less</span>
+                  <div style="width: 12px; height: 12px; border-radius: 2px; background: var(--surface-hover);"></div>
+                  <div style="width: 12px; height: 12px; border-radius: 2px; background: rgba(124, 58, 237, 0.4);"></div>
+                  <div style="width: 12px; height: 12px; border-radius: 2px; background: var(--primary);"></div>
+                  <span>More</span>
+                </div>
+              </div>
+
+              <!-- Week-wise Graph -->
+              <div class="activity-card" style="background: var(--bg-card); padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-xl); box-shadow: var(--shadow-md);">
+                <h4 style="margin-top: 0; color: var(--secondary);">Weekly Appearance</h4>
+                <div class="graph-container" style="display: flex; align-items: flex-end; justify-content: space-between; height: 160px; margin-top: var(--space-lg); padding-bottom: 24px; border-bottom: 1px solid var(--border); position: relative;">
+                  <!-- Bars rendered by JS -->
+                  <div id="profile-graph-bars" style="display: flex; width: 100%; justify-content: space-around; align-items: flex-end; height: 100%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       MODULE OVERLAY (Rights & Courses)
+       ============================================================ -->
+  <div class="module-overlay" id="module-overlay" role="dialog" aria-modal="true" aria-label="Module details">
+    <div class="module-panel" id="module-panel">
+      <div class="module-header">
+        <div class="module-header-top">
+          <h2 id="module-title">Module Title</h2>
+          <button class="module-close" id="module-close" aria-label="Close module">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+          </button>
+        </div>
+        <p id="module-description">Module description here.</p>
+      </div>
+      <div class="module-body" id="module-body">
+        <!-- Content rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CONGRATS MODAL
+       ============================================================ -->
+  <div class="congrats-modal" id="congrats-modal" role="dialog" aria-modal="true" aria-label="Congratulations">
+    <div class="congrats-content">
+      <div class="congrats-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h2>Congratulations!</h2>
+      <p id="congrats-text">You've completed this module perfectly! Your knowledge makes you unstoppable.</p>
+      <button class="btn btn-cta" id="congrats-close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Keep Going!
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti container -->
+  <div class="confetti-container" id="confetti-container"></div>
+
+  <!-- ============================================================
+       TOAST NOTIFICATION
+       ============================================================ -->
+  <div class="toast" id="toast">
+    <div class="toast-icon success" id="toast-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="toast-text">
+      <h4 id="toast-title">Success!</h4>
+      <p id="toast-message">Your action was completed.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       AUTH & ONBOARDING MODALS
+       ============================================================ -->
+  <div class="auth-overlay" id="auth-overlay">
+    
+    <!-- Login Form -->
+    <div class="auth-panel" id="login-panel">
+      <button class="module-close" onclick="closeAuthModal()" aria-label="Close login">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+      </button>
+      <div class="auth-header">
+        <h2>Welcome to EmpowerAll</h2>
+        <p>Sign in to track your progress, share your story, and join the community.</p>
+      </div>
+      <div class="auth-methods">
+        <button class="btn btn-outline" style="width: 100%; justify-content: center; gap: 0.5rem;" onclick="triggerGoogleLogin()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.3c0-.8-.1-1.5-.2-2.3H12v4.4h5.1c-.2 1.4-1.1 2.6-2.3 3.4v2.8h3.7c2.2-2 3.5-4.9 3.5-8.3Z"/><path d="M12 21.5c2.5 0 4.7-.8 6.2-2.3l-3.7-2.8c-.8.6-1.9.9-3.2.9-2.5 0-4.6-1.7-5.3-3.9H2.1v2.9c1.5 3 4.6 5.2 8.3 5.2Z"/><path d="M6.7 13.4c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V6.5H2.1C1.3 8 1 9.7 1 11.5s.3 3.5 1.1 5l3.6-2.8Z"/><path d="M12 4.5c1.4 0 2.6.5 3.6 1.4l2.7-2.7C16.6 1.7 14.5.9 12 .9 8.3.9 5.2 3.1 3.7 6.1l3.6 2.8c.7-2.2 2.8-3.9 5.3-3.9Z"/></svg>
+          Continue with Google
+        </button>
+      </div>
+      <div class="auth-divider"><span>OR</span></div>
+      <form id="login-form" onsubmit="handleLoginSubmit(event)">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email or Phone Number</label>
+          <input type="text" class="form-input" id="login-email" placeholder="example@gmail.com or 1234567890" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input type="password" class="form-input" id="login-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+      </form>
+    </div>
+
+    <!-- Onboarding Form -->
+    <div class="auth-panel" id="onboarding-panel" style="display: none;">
+      <div class="auth-header">
+        <h2>Complete Your Profile</h2>
+        <p>Tell us a bit about yourself to personalize your experience.</p>
+      </div>
+      <form id="onboarding-form" onsubmit="handleOnboardingSubmit(event)">
+        <div class="form-group">
+          <label class="form-label" for="onboard-name">Full Name</label>
+          <input type="text" class="form-input" id="onboard-name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="onboard-email">Gmail / Email</label>
+          <input type="email" class="form-input" id="onboard-email" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="onboard-location">Location (City, Country)</label>
+          <input type="text" class="form-input" id="onboard-location" placeholder="e.g. Jaipur, Rajasthan" required>
+        </div>
+        <div class="form-group" style="position: relative;">
+          <label class="form-label" for="onboard-profession">Profession</label>
+          <input type="text" class="form-input" id="onboard-profession" placeholder="Start typing..." autocomplete="off" required>
+          <ul class="autocomplete-list" id="profession-list"></ul>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="onboard-dob">Date of Birth</label>
+          <input type="date" class="form-input" id="onboard-dob" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="onboard-password">Create Password (skip if using Google)</label>
+          <input type="password" class="form-input" id="onboard-password">
+        </div>
+        <button type="submit" class="btn btn-cta" style="width: 100%;">Let's Go!</button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>EmpowerAll</h3>
+          <p>A free platform dedicated to empowering every human being through education, community, and kindness. Like the universe holds all of us — we hold each other, united in emotion, united in purpose.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Explore</h4>
+          <a onclick="navigateTo('home')">Home</a>
+          <a onclick="navigateTo('rights')">Know Your Rights</a>
+          <a onclick="navigateTo('voice')">Raise Your Voice</a>
+          <a onclick="navigateTo('courses')">Skill Courses</a>
+          <a onclick="navigateTo('kindness')">Acts of Kindness</a>
+        </div>
+        <div class="footer-links">
+          <h4>Our Promise</h4>
+          <a>Free Forever</a>
+          <a>No Discrimination</a>
+          <a>Privacy First</a>
+          <a>Community Driven</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        Made with <span class="footer-heart">&#10084;</span> for humanity &bull; EmpowerAll &copy; 2026 &bull; Free for lifetime
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chatbot Widget -->
+  <div class="chatbot-widget" id="chatbot-widget">
+    <button class="chatbot-toggle" id="chatbot-toggle" onclick="toggleChatbot()" aria-label="Open support chat">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <div class="chatbot-panel" id="chatbot-panel" style="display: none;">
+      <div class="chatbot-header">
+        <h3 id="chatbot-title">Support Assistant</h3>
+        <button class="chatbot-close" onclick="toggleChatbot()" aria-label="Close chat">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="chatbot-body" id="chatbot-body" style="display: flex; flex-direction: column; overflow-y: auto;">
+        <!-- Input Section -->
+        <div class="chatbot-form-section" id="chatbot-form-section">
+          <p class="chatbot-welcome" id="chatbot-welcome" style="margin-bottom: var(--space-sm); font-weight: 500;">Hello! What do you need help with?</p>
+          
+          <div id="support-options" style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+            <button class="btn btn-outline btn-sm" onclick="selectSupportTopic('Problem')" style="flex: 1; border-radius: 20px;">Problem</button>
+            <button class="btn btn-outline btn-sm" onclick="selectSupportTopic('Query')" style="flex: 1; border-radius: 20px;">Query</button>
+            <button class="btn btn-outline btn-sm" onclick="selectSupportTopic('Feedback')" style="flex: 1; border-radius: 20px;">Feedback</button>
+          </div>
+
+          <div id="chatbot-input-area" style="display: none;">
+            <p id="support-topic-label" style="font-size: 0.85rem; color: var(--primary); margin-bottom: 4px; font-weight: 600; display: none;"></p>
+            <textarea class="form-textarea" id="chatbot-message" placeholder="Type your message here..." rows="4" style="margin-bottom: 8px;"></textarea>
+            <button class="btn btn-primary" onclick="handleChatbotSubmit()" style="width: 100%;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              Send Message
+            </button>
+          </div>
+        </div>
+        
+        <!-- Loading State -->
+        <div class="chatbot-loading-section" id="chatbot-loading-section" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem; text-align: center;">
+          <div class="ai-spinner" style="margin-bottom: 1rem; width: 40px; height: 40px; border-width: 3px;"></div>
+          <p style="color: var(--primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem;">We are working on your query...</p>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">You will get your module in a few seconds.</p>
+        </div>
+
+        <!-- Results Section -->
+        <div class="chatbot-results-section" id="chatbot-results-section" style="display: none; flex-direction: column; gap: var(--space-md);">
+          <!-- Dynamic Module Content Will Render Here -->
+          <div id="chatbot-module-content"></div>
+          <button class="btn btn-primary" id="chatbot-complete-btn" onclick="completeChatbotModule()" style="width: 100%; margin-top: 1rem; display: none;">Complete Module</button>
+          <button class="btn btn-outline" onclick="resetChatbotUI()" style="width: 100%; margin-top: 0.5rem;">Ask Another Query</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Story Popup Modal -->
+  <div class="auth-overlay" id="story-modal-overlay" style="z-index: 10000;">
+    <div class="auth-panel" id="story-modal" style="max-width: 600px; padding: 0; width: 90%;">
+      <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: var(--space-xl); position: relative; border-radius: 20px 20px 0 0;">
+        <button class="modal-close" style="position: absolute; top: var(--space-md); right: var(--space-md); background: rgba(255,255,255,0.2); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center;" onclick="closeStoryModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <h3 id="story-modal-author" style="color: white; margin: 0; font-size: var(--fs-xl);"></h3>
+        <p id="story-modal-meta" style="color: rgba(255,255,255,0.8); margin: 4px 0 0; font-size: var(--fs-sm);"></p>
+      </div>
+      <div style="padding: var(--space-xl);">
+        <img id="story-modal-image" src="" alt="Story visual" style="width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-lg); display: none; object-fit: cover; max-height: 300px;">
+        <div id="story-modal-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: var(--space-md);"></div>
+        <p id="story-modal-content" style="color: var(--text); line-height: 1.6; font-size: var(--fs-md); white-space: pre-wrap; margin: 0;"></p>
+      </div>
+    </div>
+  </div>
+  <!-- Google Sign-In SDK (GIS Client) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  
+  <!-- App Configuration & Secrets -->
+  <!-- config.local.js has your real keys (gitignored). Falls back to config.js (placeholder template). -->
+  <script src="config.local.js" onerror="let s=document.createElement('script');s.src='config.js';document.head.appendChild(s);"></script>
+  
+  <!-- Main Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>
