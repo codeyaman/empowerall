@@ -1085,7 +1085,7 @@ document.getElementById('anon-toggle').addEventListener('click', function () {
 });
 
 // Submit voice
-document.getElementById('voice-submit').addEventListener('click', (e) => {
+document.getElementById('voice-submit').addEventListener('click', async (e) => {
   e.preventDefault();
   if (!isAuthenticated()) {
     openAuthModal();
@@ -1190,13 +1190,7 @@ async function renderVoices() {
       <div class="empty-state" style="grid-column: 1 / -1;">
         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
         <h3>No voices found</h3>
-        <p>${currentVoiceFilter === 'yours' ? 'You haven\\'t shared a story yet.' : 'Be the first to share your story and inspire change.'}</p>
-      </div>
-    `;
-    return;
-  }
-
-  container.innerHTML = voices.map(v => {You haven\'t shared a story yet.' : 'Be the first to share your story and inspire change.'}</p>
+        <p>${currentVoiceFilter === 'yours' ? "You haven't shared a story yet." : "Be the first to share your story and inspire change."}</p>
       </div>
     `;
     return;
@@ -1291,7 +1285,7 @@ document.querySelectorAll('.kindness-tag').forEach(tag => {
 });
 
 // Submit kindness
-document.getElementById('kindness-submit').addEventListener('click', () => {
+document.getElementById('kindness-submit').addEventListener('click', async () => {
   if (!isAuthenticated()) {
     openAuthModal();
     return;
