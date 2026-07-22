@@ -3320,8 +3320,10 @@ function markdownToHtml(text) {
   
   html = newHtmlLines.join('\n');
   
-  // 1. Inline Quotes
-  html = html.replace(/["“]([^\n"”]+)["”]/g, '<q style="font-style: italic; color: var(--secondary); font-weight: 500;">$1</q>');
+  html = newHtmlLines.join('\n');
+  
+  // 1. Inline Quotes (Only match quotes preceded by space or start of line to avoid breaking HTML attributes)
+  html = html.replace(/(^|\s)["“]([^\n"”<>=]+)["”]/g, '$1<q style="font-style: italic; color: var(--secondary); font-weight: 500;">$2</q>');
   
   // 2. Ellipsis
   html = html.replace(/\.{3,}/g, '&hellip;');
