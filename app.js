@@ -1655,7 +1655,6 @@ function renderProfile() {
   
   document.getElementById('profile-email').value = currentUser.email;
   document.getElementById('profile-location').value = currentUser.location;
-  document.getElementById('profile-dob-display').value = currentUser.dob;
 
   // Render Stats
   const rightsProgress = JSON.parse(localStorage.getItem('empowerall_rights_progress') || '[]');
