@@ -853,9 +853,24 @@
       </div>
     </div>
   </div>
-  <!-- Google Sign-In SDK (GIS Client) -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <!-- Firebase SDKs (using version 8 for simplicity with existing vanilla JS) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDtc4cSe6zJQJoEHlk7QLJwp6iuP_bM6zc",
+      authDomain: "empowerall-102a7.firebaseapp.com",
+      projectId: "empowerall-102a7",
+      storageBucket: "empowerall-102a7.firebasestorage.app",
+      messagingSenderId: "39687915825",
+      appId: "1:39687915825:web:acaab4cc7eb730ea03c810",
+      measurementId: "G-SZJZQJJY3D"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
   <!-- App Configuration & Secrets -->
   <!-- config.local.js has your real keys (gitignored). Falls back to config.js (placeholder template). -->
   <script src="config.local.js" onerror="let s=document.createElement('script');s.src='config.js';document.head.appendChild(s);"></script>

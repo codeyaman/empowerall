@@ -1540,70 +1540,17 @@ function closeStoryModal() {
   document.body.style.overflow = '';
 }
 
-// Google Auth
-let tokenClient;
-
-function initGoogleAuth() {
-  if (typeof google === 'undefined') {
-    setTimeout(initGoogleAuth, 500);
-    return;
-  }
-  
-  const clientID = window.CONFIG?.GOOGLE_CLIENT_ID || '';
-  if (!clientID || clientID.includes('YOUR_GOOGLE_CLIENT_ID')) {
-    console.warn("Google Client ID not configured. Google Sign-In will use simulation fallback.");
-    return;
-  }
-
-  try {
-    tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: clientID,
-      scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
-      callback: (tokenResponse) => {
-        if (tokenResponse && tokenResponse.access_token) {
-          fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-            headers: {
-              'Authorization': `Bearer ${tokenResponse.access_token}`
-            }
-          })
-          .then(res => res.json())
-          .then(profile => {
-            if (profile && profile.email) {
-              handleSuccessfulAuth(profile.sub || 'google_user', profile.email, profile.name || '');
-            } else {
-              showToast('Auth Error', 'Could not retrieve user email from Google.', 'error');
-            }
-          })
-          .catch(err => {
-            console.error("Error fetching Google profile:", err);
-            showToast('Profile Error', 'Failed to retrieve Google profile data.', 'error');
-          });
-        }
-      }
-    });
-  } catch (err) {
-    console.error("Failed to initialize Google Accounts client:", err);
-  }
-}
-
+// Google Auth (Firebase)
 function triggerGoogleLogin() {
-  const clientID = window.CONFIG?.GOOGLE_CLIENT_ID || '';
-  if (!tokenClient || !clientID || clientID.includes('YOUR_GOOGLE_CLIENT_ID')) {
-    showToast('Simulation Mode', 'Google Client ID not set. Simulating Google Auth...', 'info');
-    handleSuccessfulAuth('mock_user_google', 'mock_google_email@example.com', 'Google User');
-    return;
-  }
-  tokenClient.requestAccessToken();
-}
-
-
-
-
-async function hashPassword(password) {
-  const msgBuffer = new TextEncoder().encode(password);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      closeAuthModal();
+      showToast('Welcome!', `Logged in as ${result.user.displayName}`, 'success');
+    })
+    .catch((error) => {
+      showToast('Login Failed', error.message, 'error');
+    });
 }
 
 async function handleLoginSubmit(e) {
@@ -1611,44 +1558,19 @@ async function handleLoginSubmit(e) {
   const email = document.getElementById('login-email').value;
   const password = document.getElementById('login-password').value;
   
-  const users = JSON.parse(localStorage.getItem('empowerall_users') || '{}');
-  if (users[email]) {
-    // If user has a password set, verify it
-    if (users[email].passwordHash) {
-      const hash = await hashPassword(password);
-      if (hash !== users[email].passwordHash) {
-        showToast('Login Failed', 'Incorrect password. Please try again.', 'error');
-        return;
-      }
-    }
-    handleSuccessfulAuth('mock_user_local', email, '');
-  } else {
-    // If not found, switch to onboarding
-    document.getElementById('login-panel').style.display = 'none';
-    document.getElementById('onboarding-panel').style.display = 'block';
-    if (email.includes('@')) document.getElementById('onboard-email').value = email;
-    showToast('Not Found', 'No account found. Please complete your profile.', 'info');
-  }
-}
-
-function handleSuccessfulAuth(id, email, name) {
-  // Check if user already exists
-  const users = JSON.parse(localStorage.getItem('empowerall_users') || '{}');
-  if (users[email]) {
-    // Existing user
-    currentUser = users[email];
-    localStorage.setItem('empowerall_active_user', JSON.stringify(currentUser));
-    loadCustomCoursesFromStorage();
-    renderCourseCards();
-    updateAuthUI();
+  try {
+    await firebase.auth().signInWithEmailAndPassword(email, password);
     closeAuthModal();
-    showToast('Welcome back!', `Logged in as ${currentUser.name}`, 'success');
-  } else {
-    // New user -> Onboarding
-    document.getElementById('login-panel').style.display = 'none';
-    document.getElementById('onboarding-panel').style.display = 'block';
-    if (email.includes('@')) document.getElementById('onboard-email').value = email;
-    if (name) document.getElementById('onboard-name').value = name;
+    showToast('Welcome back!', 'Successfully logged in.', 'success');
+  } catch (err) {
+    if (err.code === 'auth/user-not-found') {
+      document.getElementById('login-panel').style.display = 'none';
+      document.getElementById('onboarding-panel').style.display = 'block';
+      if (email.includes('@')) document.getElementById('onboard-email').value = email;
+      showToast('Not Found', 'No account found. Please complete your profile.', 'info');
+    } else {
+      showToast('Login Failed', err.message, 'error');
+    }
   }
 }
 
@@ -1701,28 +1623,26 @@ async function handleOnboardingSubmit(e) {
     return;
   }
 
-  let passwordHash = null;
-  if (password) {
-    passwordHash = await hashPassword(password);
+  try {
+    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+    const user = userCredential.user;
+    await user.updateProfile({ displayName: name });
+
+    const newUser = {
+      id: user.uid,
+      name, email, location, profession, dob,
+      stats: { courses: 0, rights: 0, voices: 0, kindness: 0 }
+    };
+
+    const users = JSON.parse(localStorage.getItem('empowerall_users') || '{}');
+    users[email] = newUser;
+    localStorage.setItem('empowerall_users', JSON.stringify(users));
+    
+    closeAuthModal();
+    showToast('Profile Created!', 'Welcome to the EmpowerAll community.', 'success');
+  } catch (err) {
+    showToast('Signup Failed', err.message, 'error');
   }
-
-  const newUser = {
-    id: 'user_' + Date.now(),
-    name, email, location, profession, dob, passwordHash
-  };
-
-  const users = JSON.parse(localStorage.getItem('empowerall_users') || '{}');
-  users[email] = newUser;
-  localStorage.setItem('empowerall_users', JSON.stringify(users));
-  
-  currentUser = newUser;
-  localStorage.setItem('empowerall_active_user', JSON.stringify(currentUser));
-  loadCustomCoursesFromStorage();
-  renderCourseCards();
-  
-  updateAuthUI();
-  closeAuthModal();
-  showToast('Profile Created!', 'Welcome to the EmpowerAll community.', 'success');
 }
 
 // Profile Page rendering
@@ -1928,10 +1848,9 @@ document.getElementById('profile-edit-form').addEventListener('submit', (e) => {
 
 // Sign Out
 document.getElementById('signout-btn').addEventListener('click', () => {
-  currentUser = null;
-  localStorage.removeItem('empowerall_active_user');
-  updateAuthUI();
-  showToast('Signed Out', 'You have been successfully signed out.', 'info');
+  firebase.auth().signOut().then(() => {
+    showToast('Signed Out', 'You have been successfully signed out.', 'info');
+  });
 });
 
 // Listen for hash change to render profile
@@ -1946,16 +1865,34 @@ window.addEventListener('hashchange', () => {
 // INITIALIZATION
 // ============================================================
 function init() {
-  // Initialize Google Auth client
-  initGoogleAuth();
-
-  // Check active user
-  const savedUser = localStorage.getItem('empowerall_active_user');
-  if (savedUser) {
-    currentUser = JSON.parse(savedUser);
-    loadCustomCoursesFromStorage();
-  }
-  updateAuthUI();
+  // Listen to Firebase Auth state
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      const users = JSON.parse(localStorage.getItem('empowerall_users') || '{}');
+      if (users[user.email]) {
+        currentUser = users[user.email];
+        loadCustomCoursesFromStorage();
+      } else {
+        // Fallback for new Google Sign-In users without local profile
+        currentUser = {
+          id: user.uid,
+          name: user.displayName || 'User',
+          email: user.email,
+          profession: 'Learner',
+          stats: { courses: 0, rights: 0, voices: 0, kindness: 0 }
+        };
+        users[user.email] = currentUser;
+        localStorage.setItem('empowerall_users', JSON.stringify(users));
+      }
+      renderCourseCards();
+    } else {
+      currentUser = null;
+    }
+    updateAuthUI();
+    if (window.location.hash === '#profile') {
+      renderProfile();
+    }
+  });
   // Load saved progress
   loadProgress();
 
