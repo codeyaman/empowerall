@@ -1109,13 +1109,23 @@ document.getElementById('voice-submit').addEventListener('click', (e) => {
     anonymous,
     authorName: anonymous ? 'Anonymous' : currentUser.name,
     authorEmail: currentUser.email,
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
   };
 
-  // Save
+  // Save to LocalStorage as a fallback/cache
   const voices = JSON.parse(localStorage.getItem('empowerall_voices') || '[]');
   voices.unshift(voice);
   localStorage.setItem('empowerall_voices', JSON.stringify(voices));
+
+  // Save to Firestore globally
+  try {
+    if (typeof db !== 'undefined') {
+      await db.collection('voices').add(voice);
+    }
+  } catch (e) {
+    console.warn("Firestore error saving voice (database might not be created):", e);
+  }
 
   // Reset form
   document.getElementById('voice-category').selectedIndex = 0;
@@ -1139,9 +1149,27 @@ function setVoiceFilter(filterType) {
   renderVoices();
 }
 
-function renderVoices() {
-  const allVoices = JSON.parse(localStorage.getItem('empowerall_voices') || '[]');
-  
+async function renderVoices() {
+  const container = document.getElementById('voices-list');
+  container.innerHTML = '<div class="empty-state" style="grid-column: 1 / -1;"><h3>Loading Community Voices...</h3></div>';
+
+  let allVoices = JSON.parse(localStorage.getItem('empowerall_voices') || '[]');
+
+  try {
+    if (typeof db !== 'undefined') {
+      const snapshot = await db.collection('voices').orderBy('timestamp', 'desc').get();
+      if (!snapshot.empty) {
+        allVoices = [];
+        snapshot.forEach(doc => {
+          allVoices.push({ docId: doc.id, ...doc.data() });
+        });
+        localStorage.setItem('empowerall_voices', JSON.stringify(allVoices)); // Cache
+      }
+    }
+  } catch (e) {
+    console.warn("Firestore error fetching voices:", e);
+  }
+
   // Filter logic
   let voices = allVoices;
   if (currentVoiceFilter === 'yours') {
@@ -1157,14 +1185,18 @@ function renderVoices() {
     }
   }
 
-  const container = document.getElementById('voices-list');
-
   if (voices.length === 0) {
     container.innerHTML = `
       <div class="empty-state" style="grid-column: 1 / -1;">
         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
         <h3>No voices found</h3>
-        <p>${currentVoiceFilter === 'yours' ? 'You haven\'t shared a story yet.' : 'Be the first to share your story and inspire change.'}</p>
+        <p>${currentVoiceFilter === 'yours' ? 'You haven\\'t shared a story yet.' : 'Be the first to share your story and inspire change.'}</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = voices.map(v => {You haven\'t shared a story yet.' : 'Be the first to share your story and inspire change.'}</p>
       </div>
     `;
     return;
@@ -1281,12 +1313,22 @@ document.getElementById('kindness-submit').addEventListener('click', () => {
     likes: 0,
     authorName: currentUser.name,
     authorEmail: currentUser.email,
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
   };
 
   const items = JSON.parse(localStorage.getItem('empowerall_kindness') || '[]');
   items.unshift(item);
   localStorage.setItem('empowerall_kindness', JSON.stringify(items));
+
+  // Save to Firestore globally
+  try {
+    if (typeof db !== 'undefined') {
+      await db.collection('kindness').add(item);
+    }
+  } catch (e) {
+    console.warn("Firestore error saving kindness (database might not be created):", e);
+  }
 
   // Reset
   uploadedImageData = '';
@@ -1320,8 +1362,26 @@ function setKindnessFilter(filterType) {
   renderKindnessGallery();
 }
 
-function renderKindnessGallery() {
-  const allItems = JSON.parse(localStorage.getItem('empowerall_kindness') || '[]');
+async function renderKindnessGallery() {
+  const gallery = document.getElementById('kindness-gallery');
+  const emptyState = document.getElementById('kindness-empty');
+
+  let allItems = JSON.parse(localStorage.getItem('empowerall_kindness') || '[]');
+
+  try {
+    if (typeof db !== 'undefined') {
+      const snapshot = await db.collection('kindness').orderBy('timestamp', 'desc').get();
+      if (!snapshot.empty) {
+        allItems = [];
+        snapshot.forEach(doc => {
+          allItems.push({ docId: doc.id, ...doc.data() });
+        });
+        localStorage.setItem('empowerall_kindness', JSON.stringify(allItems)); // Cache
+      }
+    }
+  } catch (e) {
+    console.warn("Firestore error fetching kindness:", e);
+  }
   
   // Filter logic
   let items = allItems;
@@ -1337,9 +1397,6 @@ function renderKindnessGallery() {
       items = allItems.filter(item => item.authorEmail !== currentUser.email);
     }
   }
-
-  const gallery = document.getElementById('kindness-gallery');
-  const emptyState = document.getElementById('kindness-empty');
 
   if (items.length === 0) {
     gallery.innerHTML = '';
