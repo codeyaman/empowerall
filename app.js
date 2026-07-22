@@ -1912,12 +1912,78 @@ window.addEventListener('hashchange', () => {
 
 
 // ============================================================
+// GLOBAL CLOUD SYNC ENGINE
+// ============================================================
+let syncTimeout = null;
+let isRestoringFromCloud = false;
+
+function queueSyncToFirestore() {
+  if (!currentUser || typeof db === 'undefined') return;
+  if (syncTimeout) clearTimeout(syncTimeout);
+  
+  syncTimeout = setTimeout(async () => {
+    try {
+      const syncData = {
+        users: JSON.parse(localStorage.getItem('empowerall_users') || '{}'),
+        rights_progress: JSON.parse(localStorage.getItem('empowerall_rights_progress') || '[]'),
+        courses_progress: JSON.parse(localStorage.getItem('empowerall_courses_progress') || '[]'),
+        custom_courses: JSON.parse(localStorage.getItem('empowerall_custom_courses') || '[]'),
+        ai_rights_modules: JSON.parse(localStorage.getItem('empowerall_ai_rights_modules') || '[]'),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      };
+      
+      const attendanceKey = `empowerall_attendance_${currentUser.email}`;
+      syncData.attendance = JSON.parse(localStorage.getItem(attendanceKey) || '[]');
+      
+      await db.collection('user_progress').doc(currentUser.email).set(syncData, { merge: true });
+      console.log('Progress synced to cloud!');
+    } catch (e) {
+      console.warn('Failed to sync to cloud', e);
+    }
+  }, 2000);
+}
+
+// Intercept native localStorage.setItem to auto-trigger sync
+const originalSetItem = localStorage.setItem;
+localStorage.setItem = function(key, value) {
+  originalSetItem.apply(this, arguments);
+  // If it's a progress key and we're not currently restoring, queue a sync
+  if (!isRestoringFromCloud && currentUser && key.startsWith('empowerall_') && 
+      !key.includes('voices') && !key.includes('kindness')) {
+    queueSyncToFirestore();
+  }
+};
+
+// ============================================================
 // INITIALIZATION
 // ============================================================
 function init() {
   // Listen to Firebase Auth state
-  firebase.auth().onAuthStateChanged((user) => {
+  firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
+      // 1. Restore from Cloud Database (Global Sync)
+      if (typeof db !== 'undefined') {
+        try {
+          const doc = await db.collection('user_progress').doc(user.email).get();
+          if (doc.exists) {
+            isRestoringFromCloud = true;
+            const data = doc.data();
+            if (data.users) localStorage.setItem('empowerall_users', JSON.stringify(data.users));
+            if (data.rights_progress) localStorage.setItem('empowerall_rights_progress', JSON.stringify(data.rights_progress));
+            if (data.courses_progress) localStorage.setItem('empowerall_courses_progress', JSON.stringify(data.courses_progress));
+            if (data.custom_courses) localStorage.setItem('empowerall_custom_courses', JSON.stringify(data.custom_courses));
+            if (data.ai_rights_modules) localStorage.setItem('empowerall_ai_rights_modules', JSON.stringify(data.ai_rights_modules));
+            if (data.attendance) localStorage.setItem(`empowerall_attendance_${user.email}`, JSON.stringify(data.attendance));
+            isRestoringFromCloud = false;
+            console.log("Restored progress from cloud");
+          }
+        } catch(e) {
+           console.warn("Could not load cloud progress", e);
+           isRestoringFromCloud = false;
+        }
+      }
+
+      // 2. Local fallback initialization
       const users = JSON.parse(localStorage.getItem('empowerall_users') || '{}');
       if (users[user.email]) {
         currentUser = users[user.email];
@@ -1934,7 +2000,11 @@ function init() {
         users[user.email] = currentUser;
         localStorage.setItem('empowerall_users', JSON.stringify(users));
       }
+      
+      // Update UI components that rely on user
       renderCourseCards();
+      loadProgress();
+      renderRightsCards();
     } else {
       currentUser = null;
     }
