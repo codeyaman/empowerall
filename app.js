@@ -2036,12 +2036,7 @@ function init() {
   initScrollReveal();
 }
 
-// Run on DOM ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+// Initialization is now orchestrated by index.html to ensure Firebase loads first
 
 
 // ============================================================
